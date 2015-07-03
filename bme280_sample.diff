@@ -1,0 +1,49 @@
+--- bme280_sample.py	2015-07-02 17:22:54.626367794 +0900
++++ bme280.py	2015-07-02 16:34:22.111856242 +0900
+@@ -66,9 +66,12 @@
+ 	temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
+ 	hum_raw  = (data[6] << 8)  |  data[7]
+ 	
+-	compensate_T(temp_raw)
+-	compensate_P(pres_raw)
+-	compensate_H(hum_raw)
++	temperature = compensate_T(temp_raw)
++	pressure = compensate_P(pres_raw)
++	humidity = compensate_H(hum_raw)
++        return dict(temperature=temperature,
++                    pressure=pressure,
++                    humidity=humidity)
+ 
+ def compensate_P(adc_P):
+ 	global  t_fine
+@@ -92,7 +95,8 @@
+ 	v2 = ((pressure / 4.0) * digP[7]) / 8192.0
+ 	pressure = pressure + ((v1 + v2 + digP[6]) / 16.0)  
+ 
+-	print "pressure : %7.2f hPa" % (pressure/100)
++	#print "pressure : %7.2f hPa" % (pressure/100)
++        return "{:.2f}".format(pressure/100)
+ 
+ def compensate_T(adc_T):
+ 	global t_fine
+@@ -100,7 +104,8 @@
+ 	v2 = (adc_T / 131072.0 - digT[0] / 8192.0) * (adc_T / 131072.0 - digT[0] / 8192.0) * digT[2]
+ 	t_fine = v1 + v2
+ 	temperature = t_fine / 5120.0
+-	print "temp : %-6.2f ℃" % (temperature) 
++	#print "temp : %-6.2f ℃" % (temperature) 
++        return "{:.2f}".format(temperature)
+ 
+ def compensate_H(adc_H):
+ 	global t_fine
+@@ -114,8 +119,8 @@
+ 		var_h = 100.0
+ 	elif var_h < 0.0:
+ 		var_h = 0.0
+-	print "hum : %6.2f ％" % (var_h)
+-
++	#print "hum : %6.2f ％" % (var_h)
++        return "{:.2f}".format(var_h)
+ 
+ def setup():
+ 	osrs_t = 1			#Temperature oversampling x 1

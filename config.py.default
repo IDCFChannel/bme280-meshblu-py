@@ -1,0 +1,6 @@
+conf = {
+     "MESHBLU_URL": "",
+     "MESHBLU_USER": "",
+     "MESHBLU_PASSWORD": "",
+     "SEND_TO": ""
+}
