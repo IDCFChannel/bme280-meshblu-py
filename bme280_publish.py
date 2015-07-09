@@ -31,7 +31,7 @@ def main():
         retval = sensing()
         if retval:
              message = json.dumps({"devices":
-	                      conf["ACTION_UUID"],
+	                      conf["FREEBOARD_UUID"],
                               "payload": retval})
              print(message)
              client.publish("message",message)
