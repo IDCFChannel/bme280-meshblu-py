@@ -20,16 +20,18 @@ def main():
     client = mqtt.Client(client_id='',
 	                 clean_session=True, protocol=mqtt.MQTTv311)
 
-    client.username_pw_set(conf["MESHBLU_USER"], conf["MESHBLU_PASSWORD"])
-    client.connect(conf["MESHBLU_URL"], 1883, 60)
+    client.username_pw_set(conf["TRIGGER_UUID"], conf["TRIGGER_TOKEN"])
+
     client.on_connect = on_connect
     client.on_publish = on_publish
+
+    client.connect(conf["IDCF_CHANNEL_URL"], 1883, 60)
 
     while True:
         retval = sensing()
         if retval:
              message = json.dumps({"devices":
-	                      conf["SEND_TO"],
+	                      conf["ACTION_UUID"],
                               "payload": retval})
              print(message)
              client.publish("message",message)

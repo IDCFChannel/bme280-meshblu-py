@@ -1,6 +1,6 @@
 conf = {
-     "MESHBLU_URL": "",
-     "MESHBLU_USER": "",
-     "MESHBLU_PASSWORD": "",
-     "SEND_TO": ""
+     "IDCF_CHANNEL_URL": "",
+     "TRIGGER_UUID": "",
+     "TRIGGER_TOKEN": "",
+     "ACTION_UUID": ""
 }
