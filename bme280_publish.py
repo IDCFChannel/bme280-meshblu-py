@@ -20,7 +20,7 @@ def main():
     client = mqtt.Client(client_id='',
 	                 clean_session=True, protocol=mqtt.MQTTv311)
 
-    client.username_pw_set(conf["TRIGGER_UUID"], conf["TRIGGER_TOKEN"])
+    client.username_pw_set(conf["TRIGGER_1_UUID"], conf["TRIGGER_1_TOKEN"])
 
     client.on_connect = on_connect
     client.on_publish = on_publish
@@ -31,8 +31,8 @@ def main():
         retval = sensing()
         if retval:
              message = json.dumps({"devices":
-	                      [conf["ACTION_UUID"],
-	                       conf["FREEBOARD_UUID"]],
+	                      [conf["ACTION_1_UUID"],
+	                       conf["ACTION_2_UUID"]],
                               "payload": retval})
              print(message)
              client.publish("message",message)
