@@ -5,7 +5,6 @@ from time import sleep
 import json
 import sys
 import bme280
-import requests
 from config import conf
 
 def sensing():
@@ -26,15 +25,6 @@ def main():
     client.on_publish = on_publish
     client.connect(conf["IDCF_CHANNEL_URL"], 1883, 60)
 
-    # HTTP
-    url = "http://{0}/data/{1}".format(conf["IDCF_CHANNEL_URL"],
-                                       conf["TRIGGER_1_UUID"]) 
-    headers = {
-        "meshblu_auth_uuid": conf["TRIGGER_1_UUID"],
-        "meshblu_auth_token": conf["TRIGGER_1_TOKEN"]
-    };
-    payload = {"trigger":"on"}
-
     while True:
         retval = sensing()
         if retval:
@@ -44,9 +34,6 @@ def main():
                               "payload": retval})
              print(message)
              client.publish("message",message)
-               
-             if retval["temperature"] > conf["THRESHOLD"]:
-                 r = requests.post(url, headers=headers, data=payload)
         sleep(5)
 
 if __name__ == '__main__':
