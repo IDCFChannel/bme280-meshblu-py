@@ -68,10 +68,9 @@
 				"uuid": "",
 				"token": "",
 				"server": "",
-				"port": 443
+				"port": 80
 			}
 		}
 	],
 	"columns": 3
 }
-
