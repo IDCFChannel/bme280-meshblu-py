@@ -3,5 +3,6 @@ conf = {
      "TRIGGER_1_UUID": "",
      "TRIGGER_1_TOKEN": "",
      "ACTION_1_UUID": "",
-     "ACTION_2_UUID": ""
+     "ACTION_2_UUID": "",
+     "THRESHOLD": 27.0
 }
