@@ -22,8 +22,10 @@ def main():
     while True:
         retval = sensing()
         if retval:
-             print(retval["temperature"])
+             print("temperature: {}".format(retval["temperature"]))
              if float(retval["temperature"]) > conf["THRESHOLD"]:
+                 print("threshold over: {0} > {1}".format(float(retval["temperature"]),
+                                     conf["THRESHOLD"]))
                  r = requests.post(url, headers=headers, data=payload)
         sleep(5)
 
