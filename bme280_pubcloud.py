@@ -28,7 +28,7 @@ def main():
     while True:
         retval = sensing()
         if retval:
-             message = json.dumps({"devices":[conf["ACTION_1_UUID"],
+             message = json.dumps({"devices":[conf["ACTION_1_UUID"]],
                                    "payload": retval})
              print(message)
              client.publish("message",message)
