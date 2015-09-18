@@ -28,11 +28,12 @@ def main():
     while True:
         retval = sensing()
         if retval:
-             message = json.dumps({"devices":[conf["ACTION_1_UUID"],
+             #message = json.dumps({"devices":[conf["ACTION_1_UUID"]],
+             message = json.dumps({"devices":[conf["TRIGGER_1_UUID"]],
                                    "payload": retval})
              print(message)
              client.publish("message",message)
-        sleep(5)
+        sleep(10)
 
 if __name__ == '__main__':
     main()
