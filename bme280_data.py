@@ -16,14 +16,18 @@ def main():
     headers = {
         "meshblu_auth_uuid": conf["TRIGGER_1_UUID"],
         "meshblu_auth_token": conf["TRIGGER_1_TOKEN"]
-    };
+    }
+
     payload = {"trigger":"on"}
 
     while True:
         retval = sensing()
         if retval:
-             print(retval["temperature"])
+             print("temperature: {}".format(retval["temperature"]))
              if float(retval["temperature"]) > conf["THRESHOLD"]:
+                 print("threshold over: {0} > {1}".format(
+	               retval["temperature"], conf["THRESHOLD"]))
+
                  r = requests.post(url, headers=headers, data=payload)
         sleep(5)
 
